@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- JAVA와 연결할 Mapper 파일 설정 -->
+<mapper namespace="poly.persistance.mapper.ITestMapper">
+	<!-- 날씨정보 등록하기 -->
+	<insert id="InsertTestInfo" parameterType="TestDTO">
+		INSERT INTO
+		MOVIE_RESERVATION
+		(
+		MOVIE_CHECK_TIME,
+		MOVIE_SEQ
+		MOVIE_TITLE,
+		MOVIE_THEATER,
+		MOVIE_DIMENSION,
+		MOVIE_TIME,
+		MOVIE_PERCENT
+		REG_ID,
+		REG_DT,
+		CHG_ID,
+		CHG_DT
+		)
+		VALUES
+		(
+		#{movie_check_time},
+		(SELECT
+		IFNULL(MAX(A.SEQ),0)+1 FROM
+		MOVIE_RESERVATION A WHERE
+		A.MOVIE_CHECK_TIME = #{movie_check_time}),
+		#{movie_title},
+		#{movie_theater},
+		#{movie_dimension},
+		#{movie_time},
+		#{movie_percent}
+		#{reg_id},
+		SYSDATE(),
+		#{reg_id},
+		SYSDATE()
+		)
+	</insert>
+
+	<!-- 수집된 데이터 조회 -->
+	<select id="getTestInfo" parameterType="TestDTO"
+		resultType="TestDTO">
+		SELECT
+		MOVIE_CHECK_TIME,
+		MOVIE_SEQ
+		MOVIE_TITLE,
+		MOVIE_THEATER,
+		MOVIE_DIMENSION,
+		MOVIE_TIME,
+		MOVIE_PERCENT
+		REG_ID,
+		REG_DT,
+		CHG_ID,
+		CHG_DT
+		FROM
+		MOVIE_RESERVATION
+		WHERE
+		MOVIE_CHECK_TIME = #{movie_check_time}
+		ORDER BY
+		movie_seq
+	</select>
+</mapper>
