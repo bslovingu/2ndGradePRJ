@@ -15,7 +15,7 @@ import poly.dto.MovieDTO;
 import poly.dto.TestDTO;
 import poly.persistance.redis.IRedisTestMapper;
 
-@Component("TestMapper")
+@Component("redisTestMapper")
 public class TestMapper implements IRedisTestMapper {
 	
 	@Autowired

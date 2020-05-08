@@ -27,13 +27,13 @@ public class TestService implements ITestService {
 	private Logger log = Logger.getLogger(this.getClass());
 
 	// mysql 접속 위한 맵퍼
-	@Resource(name = "TestMapper")
-	private IRedisTestMapper mysqlTestMapper;
+	@Resource(name = "mysqlTestMapper")
+	private ITestMapper mysqlTestMapper;
 
 	@Resource(name = "TestService")
 	private ITestService testService;
 
-	@Resource(name = "TestMapper")
+	@Resource(name = "redisTestMapper")
 	private IRedisTestMapper testMapper;
 
 	@Override
@@ -83,6 +83,11 @@ public class TestService implements ITestService {
 	public int getTestInfoFromWEB() throws Exception {
 		log.info(this.getClass().getName() + ".getTestInfoFromWEB start!");
 		int res = 0;
+		
+		/*
+		 * cgv에서 iframe값 가지고 올 수 있는지 확인하기 
+		 * url은 북마크에 저장됨
+		 */
 		String url = "https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=%EB%82%A0%EC%94%A8";
 		Document doc = null;
 		doc = Jsoup.connect(url).get();

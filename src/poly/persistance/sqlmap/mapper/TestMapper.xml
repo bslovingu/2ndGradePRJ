@@ -8,12 +8,12 @@
 		MOVIE_RESERVATION
 		(
 		MOVIE_CHECK_TIME,
-		MOVIE_SEQ
+		MOVIE_SEQ,
 		MOVIE_TITLE,
 		MOVIE_THEATER,
 		MOVIE_DIMENSION,
 		MOVIE_TIME,
-		MOVIE_PERCENT
+		MOVIE_PERCENT,
 		REG_ID,
 		REG_DT,
 		CHG_ID,
@@ -23,14 +23,14 @@
 		(
 		#{movie_check_time},
 		(SELECT
-		IFNULL(MAX(A.SEQ),0)+1 FROM
+		IFNULL(MAX(A.MOVIE_SEQ),0)+1 FROM
 		MOVIE_RESERVATION A WHERE
 		A.MOVIE_CHECK_TIME = #{movie_check_time}),
 		#{movie_title},
 		#{movie_theater},
 		#{movie_dimension},
 		#{movie_time},
-		#{movie_percent}
+		#{movie_percent},
 		#{reg_id},
 		SYSDATE(),
 		#{reg_id},
@@ -43,12 +43,12 @@
 		resultType="TestDTO">
 		SELECT
 		MOVIE_CHECK_TIME,
-		MOVIE_SEQ
+		MOVIE_SEQ,
 		MOVIE_TITLE,
 		MOVIE_THEATER,
 		MOVIE_DIMENSION,
 		MOVIE_TIME,
-		MOVIE_PERCENT
+		MOVIE_PERCENT,
 		REG_ID,
 		REG_DT,
 		CHG_ID,

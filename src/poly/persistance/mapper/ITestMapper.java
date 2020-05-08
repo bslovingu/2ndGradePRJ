@@ -5,7 +5,7 @@ import java.util.List;
 import config.Mapper;
 import poly.dto.TestDTO;
 
-@Mapper("TestMapper")
+@Mapper("mysqlTestMapper")
 public interface ITestMapper {
 
 	// 수집된 내용 DB에 등록
