@@ -83,32 +83,41 @@ public class TestService implements ITestService {
 	public int getTestInfoFromWEB() throws Exception {
 		log.info(this.getClass().getName() + ".getTestInfoFromWEB start!");
 		int res = 0;
-		
+
 		/*
-		 * cgv에서 iframe값 가지고 올 수 있는지 확인하기 
-		 * url은 북마크에 저장됨
+		 * cgv에서 iframe값 가지고 올 수 있는지 확인하기 url은 북마크에 저장됨
 		 */
-		String url = "https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=%EB%82%A0%EC%94%A8";
+		String date = DateUtil.getDateTime("yyyyMMdd");
+		String url = "http://www.cgv.co.kr/common/showtimes/iframeMovie.aspx?midx=83217&mcode=&areacode=09&date="
+				+ date;
 		Document doc = null;
 		doc = Jsoup.connect(url).get();
-		Elements element = doc.select("div._weeklyWeather");
+		Elements divElement = doc.select("div.sect-showtimes");
+		Elements hrefElement = doc.select("a[href]");
+		Elements dimensionElement = doc.select("div.info-hall");
+		Elements timeElement = doc.select("div.info-timetable");
 
-		Iterator<Element> day_info = element.select("span.day_info").iterator();
-		Iterator<Element> morning_rain = element.select("span.morning span.rain_rate span.num").iterator();
-		Iterator<Element> afternoon_rain = element.select("span.afternoon span.rain_rate span.num").iterator();
-		Iterator<Element> high_temp = element.select("dl dd span:first-child").iterator();
-		Iterator<Element> low_temp = element.select("dl dd span:nth-child(3)").iterator();
+		Iterator<Element> movie_title = divElement.select("div.col-theater").iterator();
+		Iterator<Element> movie_theater = divElement.select("div.col-theater").iterator();
+		/*
+		 * 네이버 날씨에서는 span class="point_time morning"인데 span.morning으로 코딩되어있는 이유 질문하기 (형꺼
+		 * 원래 파일로 보기) 영화관 하나당 여러개의 시간대에 잡혀야되는데 1대1 매칭되는 것 해결법 찾기 영화 코드 알아내서 url로 지정하는 법
+		 * 찾기 iframe 이여서 url일일히 찍어서 크롤링 해야하는데 단순 반복문으로 해결법 찾기
+		 */
+		Iterator<Element> movie_dimension = dimensionElement.select("ul li:first-child").iterator();
+		Iterator<Element> movie_time = timeElement.select("em").iterator();
+		Iterator<Element> movie_percent = hrefElement.select("span.txt-lightblue").iterator();
 
 		TestDTO pDTO = null;
 
-		while (day_info.hasNext()) {
+		while (movie_title.hasNext()) {
 			pDTO = new TestDTO();
 			pDTO.setMovie_check_time(DateUtil.getDateTime("yyyyMMdd"));
-			pDTO.setMovie_title(CmmUtil.nvl(day_info.next().text()).trim());
-			pDTO.setMovie_theater(CmmUtil.nvl(morning_rain.next().text()).trim());
-			pDTO.setMovie_dimension(CmmUtil.nvl(afternoon_rain.next().text()).trim());
-			pDTO.setMovie_time(CmmUtil.nvl(high_temp.next().text()).trim());
-			pDTO.setMovie_percent(CmmUtil.nvl(low_temp.next().text()).trim());
+			pDTO.setMovie_title(CmmUtil.nvl(movie_title.next().text()).trim());
+			pDTO.setMovie_theater(CmmUtil.nvl(movie_theater.next().text()).trim());
+			pDTO.setMovie_dimension(CmmUtil.nvl(movie_dimension.next().text()).trim());
+			pDTO.setMovie_time(CmmUtil.nvl(movie_time.next().text()).trim());
+			pDTO.setMovie_percent(CmmUtil.nvl(movie_percent.next().text()).trim());
 			pDTO.setReg_id("admin");
 			res += mysqlTestMapper.InsertTestInfo(pDTO);
 		}
