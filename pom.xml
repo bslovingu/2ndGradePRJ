@@ -32,6 +32,28 @@
 			<version>1.12.1</version>
 		</dependency>
 
+		<!-- MongoDB 연동을 위해서 Driver 파일 다운로드 -->
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongo-java-driver</artifactId>
+			<version>3.11.1</version>
+		</dependency>
+
+		<!-- MongoDB와 스프링 프레임워크의 연동을 위해서 추가 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-mongodb -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>1.9.11.RELEASE</version>
+		</dependency>
+
+		<!-- java에서 json 사용 -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1</version>
+		</dependency>
+
 		<!-- ResponseBody 사용 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>

@@ -100,9 +100,9 @@ public class TestService implements ITestService {
 		Iterator<Element> movie_title = divElement.select("div.col-theater").iterator();
 		Iterator<Element> movie_theater = divElement.select("div.col-theater").iterator();
 		/*
-		 * 네이버 날씨에서는 span class="point_time morning"인데 span.morning으로 코딩되어있는 이유 질문하기 (형꺼
-		 * 원래 파일로 보기) 영화관 하나당 여러개의 시간대에 잡혀야되는데 1대1 매칭되는 것 해결법 찾기 영화 코드 알아내서 url로 지정하는 법
-		 * 찾기 iframe 이여서 url일일히 찍어서 크롤링 해야하는데 단순 반복문으로 해결법 찾기
+		 * 영화관 하나당 여러개의 시간대에 잡혀야되는데 1대1 매칭되는 것 해결법 찾기(형이 보내준 사이트 크롤링하면 해결)
+		 * 영화 코드 알아내서 url로 지정하는 법 찾기
+		 * iframe 이여서 url일일히 찍어서 크롤링 해야하는데 단순 반복문으로 해결법 찾기
 		 */
 		Iterator<Element> movie_dimension = dimensionElement.select("ul li:first-child").iterator();
 		Iterator<Element> movie_time = timeElement.select("em").iterator();
