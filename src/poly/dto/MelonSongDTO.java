@@ -1,5 +1,7 @@
 package poly.dto;
 
+//MongoDB에 저장
+
 public class MelonSongDTO {
 	private String song;
 	private String rank;

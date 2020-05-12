@@ -16,7 +16,7 @@ public class NaverTest {
 
 	public static void main(String[] args) throws IOException, ParseException {
 		// TODO Auto-generated method stub
-		String q = "폴리텍"; // 검색어
+		String q = "김현우"; // 검색어
 
 		Document doc = Jsoup.connect("https://ac.search.naver.com/nx/ac").header("origin", "http://www.naver.com")
 				.header("referer", "https://www.naver.com/").header("accept-encoding", "gzip, deflate, sdch, br")

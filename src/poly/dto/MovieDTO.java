@@ -1,5 +1,7 @@
 package poly.dto;
 
+//RedisDB에 저장
+
 public class MovieDTO {
 	private String rank_check_time;
 	private String seq;

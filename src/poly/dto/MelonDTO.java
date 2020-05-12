@@ -1,5 +1,7 @@
 package poly.dto;
 
+// MongoDB에 저장
+
 public class MelonDTO {
 
 	private String collect_time; // 수집 시간

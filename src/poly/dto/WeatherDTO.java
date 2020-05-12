@@ -1,5 +1,7 @@
 package poly.dto;
 
+//RedisDB에 저장
+
 public class WeatherDTO {
 	private String weather_check_time;
 	private String seq;
