@@ -8,13 +8,15 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
-public class TestClass {
+public class NaverTest {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
 		// TODO Auto-generated method stub
-		String q = "스칼라"; // 검색어
+		String q = "폴리텍"; // 검색어
 
 		Document doc = Jsoup.connect("https://ac.search.naver.com/nx/ac").header("origin", "http://www.naver.com")
 				.header("referer", "https://www.naver.com/").header("accept-encoding", "gzip, deflate, sdch, br")
@@ -31,19 +33,17 @@ public class TestClass {
 				.get();
 
 		List<String> result = new ArrayList<>();
-		JsonParser parser = new JsonParser();
+		JSONParser parser = new JSONParser();
 
 		// org.json 라이브러리를 사용해 결과를 파싱한다.
 
-		// JSONObject jsonObject = new JSONObject(doc.text()); --- String 받아들이기 위해서 (예외)
-		JSONObject jsonObject = (JSONObejct) parser.parse(doc.text());
-
 		// JSONObject jsonObject = new JSONObject();
-		// Object obj = parser.parse(doc.text());
-		// JSONObject jsonObj = (JSONObject) obj;
 
-		JSONArray items = (JSONArray) ((JSONArray) jsonObject.get("items")).get(0);
-		for (int i = 0; i < ((CharSequence) items).length(); i++) {
+		Object obj = parser.parse(doc.text());
+		JSONObject jsonObj = (JSONObject) obj;
+
+		JSONArray items = (JSONArray) ((JSONArray) jsonObj.get("items")).get(0);
+		for (int i = 0; i < (items).size(); i++) {
 			String item = (String) (((JSONArray) items.get(i)).get(0));
 			result.add(item);
 		}

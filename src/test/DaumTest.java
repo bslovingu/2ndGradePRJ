@@ -1,12 +1,10 @@
 package test;
 
-public class Test {
+public class DaumTest {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		System.out.println((1 > 2) ? 1 : 2);
-		
 	}
 
 }
