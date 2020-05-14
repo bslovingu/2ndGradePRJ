@@ -15,7 +15,7 @@ import org.json.simple.parser.ParseException;
 public class NaverTest {
 
 	public static void main(String[] args) throws IOException, ParseException {
-		// TODO Auto-generated method stub
+		
 		String q = "인생"; // 검색어
 
 		Document doc = Jsoup.connect("https://ac.search.naver.com/nx/ac").header("origin", "http://www.naver.com")
