@@ -16,7 +16,7 @@ public class NaverTest {
 
 	public static void main(String[] args) throws IOException, ParseException {
 		// TODO Auto-generated method stub
-		String q = "김현우"; // 검색어
+		String q = "인생"; // 검색어
 
 		Document doc = Jsoup.connect("https://ac.search.naver.com/nx/ac").header("origin", "http://www.naver.com")
 				.header("referer", "https://www.naver.com/").header("accept-encoding", "gzip, deflate, sdch, br")
@@ -38,6 +38,7 @@ public class NaverTest {
 		// org.json 라이브러리를 사용해 결과를 파싱한다.
 
 		// JSONObject jsonObject = new JSONObject();
+		// Object 객체를 이용해서 캐스팅해야한다.
 
 		Object obj = parser.parse(doc.text());
 		JSONObject jsonObj = (JSONObject) obj;
