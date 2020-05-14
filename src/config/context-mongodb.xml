@@ -8,6 +8,7 @@
 
 
 	<!-- 빈 이름 디폴트값은 mongo -->
+	<!-- 메이븐 업데이트 이후에 오류가 뜸, 하지만 pom.xml에서 버젼이 바뀐 것이 없고 MongoDB연동은 성공함 -->
 	<mongo:mongo-client host="192.168.38.128"
 		port="27017" credentials="myUser:1234@MyDB" id="mongo">
 	</mongo:mongo-client>
