@@ -19,4 +19,5 @@
 		<constructor-arg name="mongoDbFactory"
 			ref="mongoDbFactory" />
 	</bean>
+	
 </beans>
