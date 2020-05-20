@@ -12,6 +12,7 @@ public class thread_jsoup extends Thread {
 		try 
 		{
 /////////////////////////////////////////////////////////////////////////////////// ´º½º Å©·Ñ¸µ°ú ÇØ½Ã
+			// 아래 예제들로 크롤링 공부하기 (iframe 크롤링 예제 있음) 
 			
 			hash_title ha = new hash_title();
 			String url = "https://news.naver.com/main/read.nhn?mode=LSD&mid=shm&sid1=105&oid=001&aid=0011556091";
