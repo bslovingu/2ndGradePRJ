@@ -9,7 +9,6 @@ import org.rosuda.REngine.Rserve.RserveException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -30,13 +29,12 @@ public class RTestController {
 				"pemp <- c('한글','한글','Jessica Lange','Winona Ryder','Winona Ryder','Angela Bassett','Emma Thompson', "
 						+ "'Julia Roberts','Angela Bassett', 'Meryl Streep','Susan Sarandon')");
 		connection.eval("emp <- data.frame(이름=name,상사이름=pemp)");
-		connection.eval(
-				"d3SimpleNetwork(emp,width=600,height=600,file='test01.jsp')");
+		connection.eval("d3SimpleNetwork(emp,width=600,height=600,file='test02.jsp')");
 		connection.close();
 
 		/*
-		 * model.addAttribute("msg", "R파일 생성, 호출.");
-		 * model.addAttribute("url", "/index.do");
+		 * model.addAttribute("msg", "R파일 생성, 호출."); model.addAttribute("url",
+		 * "/result.do");
 		 */
 
 		return null;

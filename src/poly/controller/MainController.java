@@ -9,16 +9,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import poly.service.IMovieRankService;
 import poly.service.IWeatherService;
 
 @Controller
 public class MainController {
 	private Logger log = Logger.getLogger(this.getClass());
-	
+
 	@Resource(name = "WeatherService")
 	private IWeatherService weatherService;
-	
+
 	// TTS페이지
 	@RequestMapping(value = "index")
 	public String index(HttpServletRequest request, Model model, HttpSession session) throws Exception {
@@ -32,6 +31,13 @@ public class MainController {
 	public String TTS(HttpServletRequest request, Model model, HttpSession session) {
 
 		return "/TTS";
+
+	}
+
+	@RequestMapping(value = "result")
+	public String result(HttpServletRequest request, Model model, HttpSession session) throws Exception {
+		
+		return "/index";
 
 	}
 }

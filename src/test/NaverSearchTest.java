@@ -11,11 +11,11 @@ import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-public class NaverTest {
+public class NaverSearchTest {
 
 	public static void main(String[] args) throws IOException, ParseException {
 
-		String q = "인생"; // 검색어
+		String q = "경제"; // 검색어
 
 		Document doc = Jsoup.connect("https://ac.search.naver.com/nx/ac").header("origin", "http://www.naver.com")
 				.header("referer", "https://www.naver.com/").header("accept-encoding", "gzip, deflate, sdch, br")
@@ -24,7 +24,7 @@ public class NaverTest {
 
 				.data("st", "100") // 각 파라미터가 무엇을 뜻하는지를 확인해 적절하게 사용하는 것도 좋지만
 				.data("q_enc", "UTF-8") // 비정상적인 요청으로 감지해 아이디나 아이피가 밴 될 우려도 있으므로
-				.data("r_format", "json") // 특별한 이유가 없다면 모두 포함하는 것이 좋음
+				.data("r_format", "json").data("r_unicode", "0") // 특별한 이유가 없다면 모두 포함하는 것이 좋음
 
 				.data("t_koreng", "1").data("ans", "2").data("run", "2").ignoreContentType(true) // HTML Document가 아니므로
 																									// Response의 컨텐트 타입을
