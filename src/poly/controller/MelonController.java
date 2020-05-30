@@ -134,7 +134,7 @@ public class MelonController {
          rList = new ArrayList<MelonSingerDTO>();
       }
 
-      log.info(this.getClass().getName() + " getRankForSInger end!");
+      log.info(this.getClass().getName() + " getRankForSinger end!");
 
       return rList;
    }

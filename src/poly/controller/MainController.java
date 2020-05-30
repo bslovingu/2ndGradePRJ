@@ -31,13 +31,12 @@ public class MainController {
 	public String TTS(HttpServletRequest request, Model model, HttpSession session) {
 
 		return "/TTS";
-
 	}
 
-	@RequestMapping(value = "result")
+	@RequestMapping(value = "googleTest")
 	public String result(HttpServletRequest request, Model model, HttpSession session) throws Exception {
 		
-		return "/index";
+		return "/googleTest";
 
 	}
 }
