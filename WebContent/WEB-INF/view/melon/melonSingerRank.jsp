@@ -5,8 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	.abc{
+		background: #FF0000;
+	}
+</style>
 <script src="/js/jquery-3.5.0.min.js"></script>
 <script type="text/javascript">
+	var divCnt = 0;
+	
 	$(window).on("load",function(){
 		getRankForSinger();
 	});
@@ -23,6 +30,7 @@
 					melon_rank += (json[i].rank+"위 | ");
 					melon_rank += (json[i].singer+" | ")
 					melon_rank += (json[i].song_cnt+"곡 <br>");
+					$('#rank_for_singer1').append("<div id='" + (divCnt++) + "' class='abc'> </div>");
 				}
 				console.log(json);
 				$("#rank_for_singer").html(melon_rank);
@@ -35,7 +43,20 @@
 <body>
 	<h1>가수별 노래 랭크 순위</h1>
 	<hr>
-	<div id="rank_for_singer"></div>
+	<div id="rank_for_singer1">
+	
+	
+	
+	
+	
+	
+	
+	</div>
+	<div id="rank_for_singer1"></div>
+	<div id="rank_for_singer2"></div>
+	<div id="rank_for_singer2"></div>
+	<div id="rank_for_singer1"></div>
+	<div id="rank_for_singer1"></div>
 	<br>
 	<hr>
 </body>
