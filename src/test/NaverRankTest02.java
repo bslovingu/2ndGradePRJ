@@ -16,18 +16,17 @@ public class NaverRankTest02 {
 	public static void main(String[] args) throws IOException, ParseException {
 
 		Document doc = Jsoup.connect("https://apis.naver.com/mobile_main/srchrank/srchrank?frm=main")
-				// .header("origin", "http://www.naver.com").header("referer", "https://www.naver.com/")
+				// .header("origin", "http://www.naver.com").header("referer",
+				// "https://www.naver.com/")
 				.data("_callback", "")
 				// .data("sm", "agallgr0ma0simenmsp0")
-				
-				.data("ag", "all").data("gr", "4").data("ma", "2").data("si", "2").data("en", "-2").data("sp", "-2")
+
+				.data("ag", "all").data("gr", "2").data("ma", "-2").data("si", "-2").data("en", "-2").data("sp", "-2")
 				.ignoreContentType(true).get();
 
 		// data 값 ag, gr, ma, si, en, sp 지정시
 		// 분류별로 조회 가능 (현재는 ma 는 0인 상태)
-		// gr은 예외적으로 0~4, 나머지는 -2~2 
-		
-		System.out.println(doc);
+		// gr은 예외적으로 0~4, 나머지는 -2~2
 
 		JSONParser jParser = new JSONParser();
 
@@ -38,13 +37,9 @@ public class NaverRankTest02 {
 
 		Object obj = jParser.parse(doc.text());
 		JSONObject jsonObj = (JSONObject) obj;
-		System.out.println("-------------------------");
-		System.out.println(jsonObj);
 
 		JSONArray info = (JSONArray) ((JSONArray) jsonObj.get("data"));
-		System.out.println("-------------------------");
 		System.out.println(info);
-		System.out.println("-------------------------");
 
 		for (int i = 0; i < info.size(); i++) {
 			JSONObject tmp = (JSONObject) info.get(i);
@@ -54,7 +49,8 @@ public class NaverRankTest02 {
 			JSONArray arr = (JSONArray) tmp.get("keyword_synonyms");
 
 			System.out.println(rank + ". " + keyword + ": " + arr);
-			// System.out.println(rank + ". " + keyword + ": " + arr);
+
+			// 가지고 온 keyword를 연관 검색어 q 인자값으로 넘겨야함
 		}
 
 	}
