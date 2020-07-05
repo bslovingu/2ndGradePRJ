@@ -12,7 +12,6 @@ import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Service;
 
 import poly.dto.RankDTO;
-import poly.dto.SearchDTO;
 import poly.dto.ValueDTO;
 import poly.service.INaverRankService;
 
@@ -30,7 +29,12 @@ public class NaverRankService implements INaverRankService {
 		String si = (pDTO.getMyRange3() != null) ? pDTO.getMyRange3() : "0";
 		String en = (pDTO.getMyRange4() != null) ? pDTO.getMyRange4() : "0";
 		String sp = (pDTO.getMyRange5() != null) ? pDTO.getMyRange5() : "0";
-		/* String ag = (pDTO.getMyRange6() != null) ? pDTO.getMyRange6() : "all"; */
+		String ag = (pDTO.getMyRange6() != null) ? pDTO.getMyRange6() : "all";
+		if (Integer.parseInt(ag) == 0) {
+			ag = "all";
+		} else {
+			ag = Integer.toString(Integer.parseInt(ag) * 10) + "s";
+		}
 
 		Document doc = Jsoup.connect("https://apis.naver.com/mobile_main/srchrank/srchrank?frm=main")
 				// .header("origin", "http://www.naver.com").header("referer",
@@ -38,7 +42,7 @@ public class NaverRankService implements INaverRankService {
 				.data("_callback", "")
 				// .data("sm", "agallgr0ma0simenmsp0")
 
-				.data("ag", "all").data("gr", gr).data("ma", ma).data("si", si).data("en", en).data("sp", sp)
+				.data("ag", ag).data("gr", gr).data("ma", ma).data("si", si).data("en", en).data("sp", sp)
 				.ignoreContentType(true).get();
 
 		// data 값 ag, gr, ma, si, en, sp 지정시
@@ -74,11 +78,9 @@ public class NaverRankService implements INaverRankService {
 						keyword_synonyms.add(arr.get(j).toString());
 					}
 				}
-				SearchDTO dDTO1 = new SearchDTO();
 
 				List<String> keyword1 = new ArrayList<String>();
 				keyword1.add(keyword);
-				dDTO1.setKeyword(keyword1);
 
 				dDTO.setKeyword_synonyms(keyword_synonyms);
 				dlist.add(dDTO);

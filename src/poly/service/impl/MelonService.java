@@ -54,7 +54,7 @@ public class MelonService implements IMelonService {
 
 			MelonDTO pDTO = new MelonDTO();
 
-			pDTO.setCollect_time(DateUtil.getDateTime("yyyyMMddhhmmss"));
+			pDTO.setCollect_time(DateUtil.getDateTime("yyyyMMddHHmmss"));
 			pDTO.setRank(rank);
 			pDTO.setSinger(singer);
 			pDTO.setSong(song);

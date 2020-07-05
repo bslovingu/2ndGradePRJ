@@ -1,11 +1,18 @@
 package poly.persistance.mongo.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Component;
 
 import com.mongodb.BasicDBObject;
+
+import poly.dto.MelonDTO;
+import poly.dto.MongoDataDTO;
 import poly.persistance.mongo.IMongoTestMapper;
 
 @Component("MongoTestMapper")
@@ -32,11 +39,27 @@ public class MongoTestMapper implements IMongoTestMapper {
 
 		mongodb.createCollection(colNm).createIndex(new BasicDBObject("user_id", 1), "testIdx");
 		res = true;
-		
+
 		log.info(this.getClass().getName() + ".createCollection End~~~~~~~~~~~~~~~~~~~~~");
-		
+
 		return res;
-		
+
+	}
+
+	@Override
+	public int insertData(MongoDataDTO mDTO, String colNm) throws Exception {
+		log.info(this.getClass().getName() + ".insertData Start!");
+		int res = 0;
+		if (mDTO == null) {
+			mDTO = new MongoDataDTO();
+		}
+
+		mongodb.insert(mDTO, colNm);
+
+		res = 1;
+
+		log.info(this.getClass().getName() + ".insertData end!");
+		return res;
 	}
 
 }

@@ -7,6 +7,7 @@ public class ValueDTO {
 	private String myRange3;
 	private String myRange4;
 	private String myRange5;
+	private String myRange6;
 	/*
 	 * private String myRange6;
 	 * 
@@ -53,6 +54,14 @@ public class ValueDTO {
 
 	public void setMyRange5(String myRange5) {
 		this.myRange5 = myRange5;
+	}
+
+	public String getMyRange6() {
+		return myRange6;
+	}
+
+	public void setMyRange6(String myRange6) {
+		this.myRange6 = myRange6;
 	}
 
 }

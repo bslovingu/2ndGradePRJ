@@ -11,9 +11,6 @@ import org.json.simple.parser.ParseException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-import poly.dto.SearchDTO;
-import poly.util.CmmUtil;
-
 public class NaverSearchTest {
 
 	public static void main(String[] args) throws IOException, ParseException {

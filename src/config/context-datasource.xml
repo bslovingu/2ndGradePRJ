@@ -9,11 +9,12 @@
         lazy-init="false">
  
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/test?useSSL=false&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC" />
+        <property name="url" value="jdbc:mysql://192.168.175.54:3306/evergreen2019?useSSL=false&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC" />
         <!-- 서버에 연결할때의 value값 -->
+        <!-- jdbc:mysql://database-1.cikdpp9dv9qc.ap-northeast-2.rds.amazonaws.com:3306/project?useSSL=false&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC -->
         <!-- jdbc:mysql://192.168.175.54:3306/evergreen2019?useSSL=false&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC -->
-        <property name="username" value="root" />
-        <property name="password" value="epdlxjqnstjrrhk" />
+        <property name="username" value="admin" />
+        <property name="password" value="g*89*597*9" />
     </bean>
     
 </beans>

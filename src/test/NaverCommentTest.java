@@ -11,7 +11,6 @@ import java.util.List;
 import javax.net.ssl.HttpsURLConnection;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import poly.util.CmmUtil;
@@ -31,7 +30,10 @@ public class NaverCommentTest {
 
 	private void sendPost() throws Exception {
 
-		String url = "https://news.naver.com/main/read.nhn?m_view=1&includeAllCount=true&mode=LSD&mid=sec&sid1=102&oid=028&aid=0002498741";
+		String url = "https://news.naver.com/main/read.nhn?m_view=1&includeAllCount=true&mode=LSD&mid=sec&sid1=101&oid=014&aid=0004441880";
+
+		System.out
+				.println(System.nanoTime() / 1000000000.0 + "-------------- URL CONNECTION~~~~~~~~~~~~~~~~~~~~~~~~시작");
 
 		if (url.charAt(8) == 'n') {
 			int tmpIndex = url.lastIndexOf("&");
@@ -49,7 +51,9 @@ public class NaverCommentTest {
 			int cnt = 1;
 			boolean testb = true;
 			List<String> strList = new ArrayList<String>();
+
 			while (testb) {
+				System.out.println(System.nanoTime() / 1000000000.0 + "-------------- 하나씩연결~~~~~~~~~~~~~~~~~~~~~~~~시작");
 				String t_url = test_url + Integer.toString(cnt);
 				URL obj = new URL(t_url);
 
@@ -66,9 +70,9 @@ public class NaverCommentTest {
 
 				DataOutputStream wr = new DataOutputStream(con.getOutputStream());
 				wr.flush();
-				wr.close();
+				/* wr.close(); */
 
-				int responseCode = con.getResponseCode();
+				/* int responseCode = con.getResponseCode(); */
 
 				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 				String inputLine;
@@ -87,61 +91,41 @@ public class NaverCommentTest {
 
 				String str = tmpStr.substring(openIndex + 1, closeIndex);
 
-				/*
-				 * JsonParser parser = new JsonParser(); Object tmpObj = parser.parse(str);
-				 * JsonObject jsonObj = (JsonObject) tmpObj;
-				 */
-
-				/*
-				 * JSONParser jParser = new JSONParser();
-				 * 
-				 * JSONArray jobj0 = (JSONArray) jParser.parse(str);
-				 * 
-				 * for (int i = 0; i < jobj0.size(); i++) { JSONObject tmp = (JSONObject)
-				 * jobj0.get(i); String comment = String.valueOf(tmp.get("result"));
-				 * 
-				 * }
-				 */
-
 				JsonParser jsonParser = new JsonParser();
 				JsonElement jsonElement = jsonParser.parse(str);
-
-				/*
-				 * String result1 = jsonElement.getAsJsonObject().get("result").toString();
-				 * System.out.println(result1);
-				 * 
-				 * System.out.println("-----------------------"); String result2 =
-				 * jsonElement.getAsJsonObject().get("result").getAsJsonObject().toString();
-				 * System.out.println(result2);
-				 */
-
-				String result3 = jsonElement.getAsJsonObject().get("result").getAsJsonObject().get("commentList")
-						.toString();
-
-				JsonElement finalElement = jsonParser.parse(result3);
-
-				// String result4 =
-				// finalElement.getAsJsonArray().get(0).getAsJsonObject().get("contents").toString();
-				// Array 인덱스는 0~19로 가져오면 됨
 
 				int k = 0;
 				Iterator<JsonElement> iter = jsonElement.getAsJsonObject().get("result").getAsJsonObject()
 						.get("commentList").getAsJsonArray().iterator();
+				System.out.println(iter.hasNext());
+
 				while (iter.hasNext()) {
 					k++;
 					iter.next();
 				}
+
 				String[] arr = new String[k];
 
-				for (int i = 0; i < k; i++) {
-					arr[i] = CmmUtil.nvl(jsonElement.getAsJsonObject().get("result").getAsJsonObject()
-							.get("commentList").getAsJsonArray().get(i).getAsJsonObject().get("contents").toString());
-					strList.add(arr[i]);
-					if (k != 20 && i == k - 1) {
-						testb = false;
+				if (k == 0) {
+					strList.add("아직 댓글이 없습니다.");
+					testb = false;
+					wr.close();
+				} else {
+					for (int i = 0; i < k; i++) {
+						arr[i] = CmmUtil
+								.nvl(jsonElement.getAsJsonObject().get("result").getAsJsonObject().get("commentList")
+										.getAsJsonArray().get(i).getAsJsonObject().get("contents").toString());
+
+						strList.add(arr[i]);
+						if (k != 20 && i == k - 1) {
+							testb = false;
+							wr.close();
+						}
 					}
+
 				}
 				cnt++;
+				System.out.println(System.nanoTime() / 1000000000.0 + "-------------- 하나씩연결~~~~~~~~~~~~~~~~~~~~~~~~끝");
 			}
 
 			System.out.println("-----------------------------------");
@@ -152,7 +136,10 @@ public class NaverCommentTest {
 			 * for(int i =0; i<strList.size(); i++) { System.out.println(strList.get(i)); }
 			 */
 
-			System.out.println(strList.get(100));
+			 System.out.println(strList.get(strList.size()-1)); 
+
+			System.out.println(
+					System.nanoTime() / 1000000000.0 + "-------------- URL CONNECTION~~~~~~~~~~~~~~~~~~~~~~~~끝");
 
 		}
 

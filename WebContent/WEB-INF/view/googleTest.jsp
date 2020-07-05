@@ -8,6 +8,10 @@
 
 <script type="text/javascript"
 	src="https://ssl.gstatic.com/trends_nrtr/2213_RC01/embed_loader.js"></script>
+
+</head>
+<body>
+냐옹~~~~~~~~~
 <script type="text/javascript">
 	trends.embed
 			.renderExploreWidget(
@@ -17,19 +21,7 @@
 							"keyword" : "노무현",
 							"geo" : "KR",
 							"time" : "now 1-H"
-						}, {
-							"keyword" : "구미 엘림교회",
-							"geo" : "KR",
-							"time" : "now 1-H"
-						}, {
-							"keyword" : "검정고시",
-							"geo" : "KR",
-							"time" : "now 1-H"
-						}, {
-							"keyword" : "어린이 괴질",
-							"geo" : "KR",
-							"time" : "now 1-H"
-						} ],
+						}],
 						"category" : 0,
 						"property" : ""
 					},
@@ -38,8 +30,6 @@
 						"guestPath" : "https://trends.google.co.kr:443/trends/embed/"
 					});
 </script>
-</head>
-<body>
-냐옹
+냐옹~~~~~~~~~
 </body>
 </html>
