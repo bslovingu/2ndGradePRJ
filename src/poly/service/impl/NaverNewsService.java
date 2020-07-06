@@ -409,31 +409,21 @@ public class NaverNewsService implements INaverNewsService {
 		log.info("모든 기사 내용 분석 시작");
 
 		RConnection c = new RConnection();
-		c.eval("negative <- readLines('C:\\emoDic\\negDic.txt', encoding='UTF-8')");
-		c.eval("positive <- readLines('C:\\emoDic\\posDic.txt', encoding='UTF-8')");
+		c.eval("negative <- readLines('C:\\\\emoDic\\\\negDic.txt', encoding='UTF-8')");
+		c.eval("positive <- readLines('C:\\\\emoDic\\\\posDic.txt', encoding='UTF-8')");
 
 		c.assign("rc_con", sArr_con); // 형태소 분석
 		c.assign("rc_com", sArr_com);
 
 		log.info("형태소분석 시작");
-		// c.eval("m_df <- rc_con %>% SimplePos09 %>% melt %>% as_tibble");
-		c.eval("m_df <- as_tibble(melt(SimplePos09(rc_con,autoSpacing=T)))");
-		// c.eval("m_df_1 <- rc_com %>% SimplePos09 %>% melt %>% as_tibble");
-		c.eval("m_df_1 <- as_tibble(melt(SimplePos09(rc_com,autoSpacing=T)))");
-
-		// ---------------------------------------
-		// c.eval("wordList <- m_df_1 %>% select(2)");
-		c.eval("wordList <- select(m_df_1,2)");
-		// ---------------------------------------
-		// c.eval("m_df <- m_df %>% select(3,1)");
-		c.eval("m_df <- select(m_df,3,1)");
-		// c.eval("m_df <- m_df %>% mutate(noun=str_match(value,
-		// '([A-Z|a-z|0-9|가-힣]+)/N')[,2]) %>% na.omit");
-		c.eval("m_df <- na.omit(mutate(m_df,noun=str_match(value, '([A-Z|a-z|0-9|가-힣]+)/N')[,2]))");
-		// c.eval("m_df <- m_df %>% count(noun, sort = TRUE)");
-		c.eval("m_df <- count(m_df,noun, sort=TRUE)");
-		c.eval("m_df <- filter(m_df,nchar(noun)>=2)");
-		c.eval("m_df <- filter(m_df,n>=2)");
+		
+        c.eval("m_df <- rc_con %>% SimplePos09 %>% melt %>% as_tibble %>% select(3,1)");
+        c.eval("m_df_1 <- rc_com %>% SimplePos09 %>% melt %>% as_tibble");
+        c.eval("wordList <- m_df_1 %>% select(2)");
+        c.eval("m_df <- m_df %>% mutate(noun=str_match(value, '([A-Z|a-z|0-9|가-힣]+)/N')[,2]) %>% na.omit");
+        c.eval("m_df <- m_df %>% count(noun, sort = TRUE)");
+        c.eval("m_df <- filter(m_df,nchar(noun)>=2)");
+        c.eval("m_df <- filter(m_df,n>=2)");
 		log.info("형태소분석 끝");
 
 		// ---------------------------------------
